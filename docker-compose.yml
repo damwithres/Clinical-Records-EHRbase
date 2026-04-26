@@ -25,7 +25,10 @@ services:
       keycloak:
         condition: service_started
     ports:
-      - "8080:8080"
+      # Modified by Rezilant AI, 2026-04-26 14:28:22 GMT, Bind port to localhost only to prevent external access
+      - "127.0.0.1:8080:8080"
+      # Original Code
+      # - "8080:8080"
     networks:
       - ehrbase-net
 
