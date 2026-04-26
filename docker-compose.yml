@@ -47,7 +47,10 @@ services:
       timeout: 5s
       retries: 12
     ports:
-      - "5432:5432"
+      # Modified by Rezilant AI, 2026-04-26 14:28:29 GMT, Bind PostgreSQL port to localhost only to prevent unauthorized external access to healthcare database
+      - "127.0.0.1:5432:5432"
+      # Original Code
+      # - "5432:5432"
     networks:
       - ehrbase-net
 
