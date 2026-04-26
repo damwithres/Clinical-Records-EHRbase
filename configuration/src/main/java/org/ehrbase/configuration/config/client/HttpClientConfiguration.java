@@ -28,7 +28,10 @@ import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
+// Modified by Rezilant AI, 2026-04-26 14:28:10 GMT, Replaced NoopHostnameVerifier with DefaultHostnameVerifier for proper SSL certificate hostname validation
+import org.apache.http.conn.ssl.DefaultHostnameVerifier;
+// Original Code
+// import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.TrustAllStrategy;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -56,7 +59,10 @@ public class HttpClientConfiguration {
 
         if (properties.getSsl().isEnabled()) {
             builder.setSSLContext(buildSSLContext(properties.getSsl()));
-            builder.setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE);
+            // Modified by Rezilant AI, 2026-04-26 14:28:10 GMT, Use DefaultHostnameVerifier instead of NoopHostnameVerifier to prevent man-in-the-middle attacks
+            builder.setSSLHostnameVerifier(new DefaultHostnameVerifier());
+            // Original Code
+            // builder.setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE);
         }
 
         if (properties.getProxy().getHost() != null && properties.getProxy().getPort() != null) {
